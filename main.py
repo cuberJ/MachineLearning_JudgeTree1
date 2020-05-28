@@ -7,12 +7,12 @@ import math
 import networkx as nx
 from matplotlib import pyplot as plt
 class JudgeTree:
-    data = []
+    data = []  # 将lib中的字符串分别转为一个属于个人的字典：data[{name:yaoming, man:1, actor:0……}]这种格式
     Ent_name = 0
     Attribute = ["man", "work", "70", "bald", "80", "marr", "selc", "bas", "land", "actor"]
     lib = ['yaoming 1 1 0 0 1 0 0 1 1 0','liuxinag 1 1 0 0 1 1 0 0 1 0','kebi 1 1 1 1 0 0 0 1 0 0','Cluo 1 1 0 0 1 0 0 0 0 0','liudehua 1 0 0 0 0 0 0 0 0 1','maobuyi 1 0 0 0 0 0 1 0 1 0','zhoujielun 1 0 1 0 0 0 0 0 0 1','huangbo 1 0 1 0 0 0 0 0 1 1','xuzheng 1 0 1 1 0 0 0 0 1 1','zhangyining 0 1 0 0 1 0 0 0 1 0','langping 0 1 0 0 0 1 0 0 1 0','zhuting 0 1 0 0 0 0 0 0 1 0','yangchaoyue 0 0 0 0 0 0 1 0 1 1','yangmi 0 0 0 0 1 1 0 0 1 1','degnziqi 0 0 0 0 0 0 0 0 0 0','xujiaying 0 0 0 0 1 0 1 0 0 0','zhaoliying 0 0 0 0 1 0 0 0 1 1']
     G = nx.DiGraph()
-    pos_data = {}
+    pos_data = {}  # 作图使用
     lable_count = 0
 
     def Input(self):
@@ -37,10 +37,10 @@ class JudgeTree:
         length = len(data)
         if length <= 1:
             return 0
-        temp1 = 1/length * math.log2(1/length)
-        temp2 = (length - 1) * math.log2((length - 1) / length)
-        temp = (temp1 + temp2) * -1 * length
-        return temp
+#        temp1 = 1/length * math.log2(1/length)
+        temp1 = math.log2(1/length) * -1
+#        temp2 = (length - 1) * math.log2((length - 1) / length)
+        return temp1
 
     def GianCount(self, data, attr):  # 集合D的信息增量计算函数，data：集合，attr：属性.返回值为该属性的Gain
         length = len(data)
@@ -113,7 +113,3 @@ class JudgeTree:
 
 test = JudgeTree()
 test.run()
-
-
-
-
